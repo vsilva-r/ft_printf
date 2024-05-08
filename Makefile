@@ -13,13 +13,13 @@
 NAME = libftprintf.a
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -I
 
 LIBFT = ./libft/libft.a
 
 SRCS = ft_printf.c
 				
-OBJS := $(SRCS:%.c=%.o)
+OBJS := $(SRCS:%.c=objs/%.o)
 
 .PHONY = all clean fclean re bonus
 
@@ -38,7 +38,9 @@ ${LIBFT}:
 
 $(OBJS): $(SRCS) ${LIBFT}
 	@echo -n "Creating objects... "
-	@cc ${CFLAGS} ${SRCS} -Llibft -lft -c
+	@mkdir -p objs
+	@cc ${CFLAGS} ${SRCS} ${LIBFT} -c
+	@mv *.o objs
 	@echo "Done."
 
 clean:
