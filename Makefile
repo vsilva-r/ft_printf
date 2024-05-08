@@ -1,0 +1,54 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vsilva-r <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/07 18:04:23 by vsilva-r          #+#    #+#              #
+#    Updated: 2024/05/07 18:04:24 by vsilva-r         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = libftprintf.a
+
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+
+LIBFT = ./libft/libft.a
+
+SRCS = ft_printf.c
+				
+OBJS := $(SRCS:%.c=%.o)
+
+.PHONY = all clean fclean re bonus
+
+all : ${NAME}
+
+$(NAME): ${LIBFT} ${OBJS}
+	@echo -n "Linking archive... "
+	@cp ${LIBFT} ${NAME} 
+	@ar rs ${NAME} ${OBJS}
+	@echo "Done."
+	
+${LIBFT}: 
+	@echo "Making libft library... "
+	@make -C libft
+	@echo "Done."
+
+$(OBJS): $(SRCS) ${LIBFT}
+	@echo -n "Creating objects... "
+	@cc ${CFLAGS} ${SRCS} -Llibft -lft -c
+	@echo "Done."
+
+clean:
+	@echo -n "Cleaning objects... "
+	@rm -rf *.o *.gch
+	@echo "Done."
+	
+fclean: clean
+	@echo -n "Cleaning archive... "
+	@rm -rf ${NAME} .bonus
+	@echo "Done."
+
+re: fclean all
