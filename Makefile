@@ -13,7 +13,7 @@
 NAME = libftprintf.a
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I
+CFLAGS = -Wall -Werror -Wextra
 
 LIBFT = ./libft/libft.a
 
@@ -39,18 +39,19 @@ ${LIBFT}:
 $(OBJS): $(SRCS) ${LIBFT}
 	@echo -n "Creating objects... "
 	@mkdir -p objs
-	@cc ${CFLAGS} ${SRCS} ${LIBFT} -c
+	@cc ${CFLAGS} ${SRCS} -c
 	@mv *.o objs
 	@echo "Done."
 
 clean:
 	@echo -n "Cleaning objects... "
-	@rm -rf *.o *.gch
+	@rm -rf *.o *.gch objs
 	@echo "Done."
 	
 fclean: clean
-	@echo -n "Cleaning archive... "
+	@echo -n "Cleaning archives... "
 	@rm -rf ${NAME} .bonus
+	@make fclean -C libft
 	@echo "Done."
 
 re: fclean all
