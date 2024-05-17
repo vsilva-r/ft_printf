@@ -22,3 +22,4 @@
 #endif
 
 int	ft_printf(const char *format, ...);
+int	ft_printf_bonus(const char *format, ...);

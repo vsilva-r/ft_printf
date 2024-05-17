@@ -17,7 +17,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 LIBFT = ./libft/libft.a
 
-SRCS = ft_printf.c
+SRCS = ft_printf.c ft_printf_bonus.c
 				
 OBJS := $(SRCS:%.c=objs/%.o)
 

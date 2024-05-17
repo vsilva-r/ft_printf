@@ -45,6 +45,8 @@ void	ft_putnbr_base(int nbr, char *base)
 	int	j;
 
 	i = 0;
+	if (!base)
+		return ;
 	while (base[i])
 	{
 		if (base[i] == '+' || base[i] == '-')
@@ -62,8 +64,11 @@ void	ft_putnbr_base(int nbr, char *base)
 	if (base_size < 2)
 		return ;
 	if (nbr == 0)
-		write(1, "0", 1);
-	write_that_shit(nbr, base, base_size);
+		write(1, base, 1);
+	if (base_size % 8 == 0)
+		write_that_shit((unsigned) nbr, base, base_size);
+	else
+		write_that_shit(nbr, base, base_size);
 }
 /*
 int	main(void)
