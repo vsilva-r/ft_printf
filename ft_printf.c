@@ -6,63 +6,75 @@
 /*   By: vsilva-r <vsilva-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 12:00:17 by vsilva-r          #+#    #+#             */
-/*   Updated: 2024/05/07 17:47:25 by vsilva-r         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:33:50 by vsilva-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+
+static int	iprintstring(char *str)
+{
+	if (!str)
+		return (ft_iputstr("(null)"));
+	else
+		return (ft_iputstr(str));
+}
+
+static int	iprintpointer(void *pointer)
+{
+	if (!pointer)
+		return (ft_iputstr("(nil)"));
+	else
+		return (ft_iputstr("0x") + ft_iputnbr_base((unsigned long) pointer, HEXL));
+}
+
+static int	printit(char format, va_list args)
+{
+	if ((format) == '%')
+		return (ft_iputchar(format));
+	else if (format == 'i' || format == 'd')
+		return (ft_iputnbr(va_arg(args, int)));
+	else if (format == 'u')
+		return (ft_iputnbr(va_arg(args, unsigned int)));
+	else if (format == 'o')
+		return (ft_iputnbr_base(va_arg(args, int), OCT));
+	else if (format == 'x')
+		return (ft_iputnbr_base(va_arg(args, int), HEXL));
+	else if (format == 'X')
+		return (ft_iputnbr_base(va_arg(args, int), HEXU));
+	else if (format == 'c')
+		return (ft_iputchar((char)va_arg(args, int)));
+	else if (format == 's')
+		return (iprintstring(va_arg(args, char *)));
+	else if (format == 'p')
+		return (iprintpointer(va_arg(args, void *)));
+	//*error_flag = 1;
+	return (ft_iputchar('%'));
+}
 
 int	ft_printf(const char *format, ...)
 {
-	va_list args;
-	char	*str;
+	va_list	args;
+	int		written;
+	//int		error_flag;
 
 	if (!format)
 		return (-1);
 	va_start(args, format);
+	//error_flag = 0;
+	written = 0;
 	while (*format)
 	{
-		if(*format == '%')
+		if (*format == '%')
 		{
-			if (*(++format) == '%')
-				ft_putchar(*format);
-			else if (*format == 'd' || *format == 'd')
-				ft_putnbr(va_arg(args, int));
-			else if (*format == 'u')
-				ft_putnbr(va_arg(args, unsigned int));
-			else if (*format == 'o')
-				ft_putnbr_base(va_arg(args, int), OCT);
-			else if (*format == 'x')
-				ft_putnbr_base(va_arg(args, int), HEXL);
-			else if (*format == 'X')
-				ft_putnbr_base(va_arg(args, int), HEXU);
-			else if (*format == 'c')
-				ft_putchar((char)va_arg(args, int));
-			else if (*format == 's')
-			{
-				str = va_arg(args, char *);
-				if (!str)
-					ft_putstr("(null)");
-				else
-					ft_putstr(str);
-			}
-			else if (*format == 'p')
-			{
-				if (!va_arg(args, char *))
-					ft_putstr("(nil)");
-				else
-				{
-					ft_putstr("0x");
-					ft_putnbr_base((long int)va_arg(args, void *), HEXL);
-				}
-			}
-			else
-				return (-1);
+			written += printit(*(++format), args);
 		}
 		else
-			ft_putchar(*format);
+			written += ft_iputchar(*format);
 		format++;
 	}
 	va_end(args);
-	return (0);
+	//if (error_flag)
+	//	return (-1);
+	return (written);
 }

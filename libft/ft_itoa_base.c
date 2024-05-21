@@ -21,28 +21,20 @@ static size_t	get_number_len(int n, int base_size)
 		len += 1;
 	while (n)
 	{
+		printf("CHECK %d\n", n);
 		len += 1;
 		n /= base_size;
 	}
 	return (len);
 }
 
-char	*ft_itoa_base(int n, char *base)
+char	*actual_itoa_base(int number, char *base, int base_size)
 {
 	size_t			len;
-	int				base_size;
-	unsigned int	number;
 	char			*string;
-
-	base_size = ft_strlen(base);
-	//
-	// add base checks
-	//
-	if (n > 0 || base_size % 8 == 0)
-		number = (unsigned) n;
-	else
-		number = -n;
+	
 	len = get_number_len(number, base_size);
+	printf("CHECK LEN %zu\n", len);
 	string = (char *)ft_calloc(len + 1, sizeof(char));
 	if (number == 0)
 	{
@@ -59,4 +51,35 @@ char	*ft_itoa_base(int n, char *base)
 		string[--len] = '-';
 	}
 	return (string);
+}
+
+char	*ft_itoa_base(int n, char *base)
+{
+	int				base_size;
+	int	i;
+	int	j;
+
+	i = 0;
+	if (!base)
+		return (NULL);
+	while (base[i])
+	{
+		if (base[i] == '+' || base[i] == '-')
+			return (NULL);
+		j = i + 1;
+		while (base[j])
+		{
+			if (base[i] == base[j])
+				return (NULL);
+			j++;
+		}
+		i++;
+	}
+	base_size = &base[i] - base;
+	if (base_size < 2)
+		return (NULL);
+	if (n > 0 || base_size % 8 == 0)
+		return(actual_itoa_base((unsigned) n, base, base_size));
+	else 
+		return(actual_itoa_base(-n, base, base_size));
 }

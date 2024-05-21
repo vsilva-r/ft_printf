@@ -25,6 +25,10 @@
 	+ not with o or x/X
 	[space] not with o or x/X
 	# only with o and x/X
+	
+	NOTES
+	> Create a struct that stores flags
+	> Propagate -1 return all the way to the end in case of error!!
 
 */
 
