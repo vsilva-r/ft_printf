@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iputnbr_base.c                                  :+:      :+:    :+:   */
+/*   ft_uputnbr_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsilva-r <vsilva-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsilva-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 16:24:09 by vsilva-r          #+#    #+#             */
-/*   Updated: 2024/05/20 16:31:35 by vsilva-r         ###   ########.fr       */
+/*   Created: 2024/05/21 19:27:08 by vsilva-r          #+#    #+#             */
+/*   Updated: 2024/05/21 19:27:18 by vsilva-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-// This helper function is only here so that ft_putnbr_base doesn't calculate 
+// This helper function is only here so that ft_putnbr_base doesn't calculate
 // base_size on every iteration.
-static int	write_that_shit(long int nbr, char *base, int base_size)
+static int	write_that_shit(unsigned long nbr, char *base, int base_size)
 {
 	int		current;
 	int		written;
@@ -60,9 +60,9 @@ static int	check_base(char *base)
 	return (&base[i] - base);
 }
 
-// So ft_iputnbr_base checks the base for any problems and then it calls 
+// So ft_iputnbr_base checks the base for any problems and then it calls
 // write_that_shit() to write it iteratively
-int	ft_iputnbr_base(long int nbr, char *base)
+int	ft_uputnbr_base(unsigned long int nbr, char *base)
 {
 	int	base_size;
 
@@ -71,8 +71,6 @@ int	ft_iputnbr_base(long int nbr, char *base)
 		return (0);
 	if (nbr == 0)
 		return (write(1, base, 1));
-	if (base_size % 8 == 0)
-		return (write_that_shit((unsigned int) nbr, base, base_size));
 	else
 		return (write_that_shit(nbr, base, base_size));
 }

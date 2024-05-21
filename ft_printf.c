@@ -25,7 +25,7 @@ static int	iprintpointer(void *pointer)
 	if (!pointer)
 		return (ft_iputstr("(nil)"));
 	else
-		return (ft_iputstr("0x") + ft_iputnbr_base((unsigned long) pointer, HEXL));
+		return (ft_iputstr("0x") + ft_uputnbr_base((unsigned long) pointer, HEXL));
 }
 
 static int	printit(char format, va_list args)
@@ -37,11 +37,11 @@ static int	printit(char format, va_list args)
 	else if (format == 'u')
 		return (ft_iputnbr(va_arg(args, unsigned int)));
 	else if (format == 'o')
-		return (ft_iputnbr_base(va_arg(args, int), OCT));
+		return (ft_uputnbr_base(va_arg(args, unsigned int), OCT));
 	else if (format == 'x')
-		return (ft_iputnbr_base(va_arg(args, int), HEXL));
+		return (ft_uputnbr_base(va_arg(args, unsigned int), HEXL));
 	else if (format == 'X')
-		return (ft_iputnbr_base(va_arg(args, int), HEXU));
+		return (ft_uputnbr_base(va_arg(args, unsigned int), HEXU));
 	else if (format == 'c')
 		return (ft_iputchar((char)va_arg(args, int)));
 	else if (format == 's')

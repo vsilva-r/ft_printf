@@ -24,6 +24,7 @@
 int	ft_printf(const char *format, ...);
 int	ft_printf_bonus(const char *format, ...);
 int	ft_iputstr(char *str);
-int	ft_iputnbr_base(long long int nbr, char *base);
+int	ft_iputnbr_base(long int nbr, char *base);
+int	ft_uputnbr_base(unsigned long nbr, char *base);
 int	ft_iputnbr(long long int nbr);
 int	ft_iputchar(char c);

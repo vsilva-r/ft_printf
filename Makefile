@@ -17,7 +17,9 @@ CFLAGS = -Wall -Werror -Wextra
 
 LIBFT = ./libft/libft.a
 
-SRCS = ft_printf.c ft_iputnbr.c ft_iputnbr_base.c ft_iputstr.c ft_iputchar.c
+SRCS = ft_printf.c ft_iputnbr.c ft_iputnbr_base.c ft_iputstr.c ft_iputchar.c \
+		ft_uputnbr_base.c
+		
 BONUS = ft_printf_bonus.c
 				
 OBJS := $(SRCS:%.c=objs/%.o)
@@ -27,7 +29,7 @@ BONUS_OBJS = $(BONUS:%.c=bonus_objs/%.o)
 
 all : ${NAME}
 
-$(NAME): ${LIBFT} ${OBJS}
+$(NAME): ${LIBFT}
 	@echo -n "Linking archive... "
 	@cp ${LIBFT} ${NAME} 
 	@ar rs ${NAME} ${OBJS}
