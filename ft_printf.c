@@ -25,7 +25,7 @@ static int	iprintpointer(void *pointer)
 	if (!pointer)
 		return (ft_iputstr("(nil)"));
 	else
-		return (ft_iputstr("0x") + ft_uputnbr_base((unsigned long) pointer, HEXL));
+		return (ft_iputstr("0x") + ft_uputnbr_base(pointer, HEXL));
 }
 
 static int	printit(char format, va_list args)
@@ -48,7 +48,6 @@ static int	printit(char format, va_list args)
 		return (iprintstring(va_arg(args, char *)));
 	else if (format == 'p')
 		return (iprintpointer(va_arg(args, void *)));
-	//*error_flag = 1;
 	return (ft_iputchar('%'));
 }
 
@@ -56,12 +55,10 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		written;
-	//int		error_flag;
 
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	//error_flag = 0;
 	written = 0;
 	while (*format)
 	{
@@ -74,7 +71,5 @@ int	ft_printf(const char *format, ...)
 		format++;
 	}
 	va_end(args);
-	//if (error_flag)
-	//	return (-1);
 	return (written);
 }
