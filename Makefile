@@ -29,7 +29,7 @@ BONUS_OBJS = $(BONUS:%.c=bonus_objs/%.o)
 
 all : ${NAME}
 
-$(NAME): ${LIBFT}
+$(NAME): ${LIBFT} ${OBJS}
 	@echo -n "Linking archive... "
 	@cp ${LIBFT} ${NAME} 
 	@ar rs ${NAME} ${OBJS}
