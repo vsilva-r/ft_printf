@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#define UL (unsigned long)
 
 static int	iprintstring(char *str)
 {
@@ -25,7 +26,7 @@ static int	iprintpointer(void *pointer)
 	if (!pointer)
 		return (ft_iputstr("(nil)"));
 	else
-		return (ft_iputstr("0x") + ft_uputnbr_base(pointer, HEXL));
+		return (ft_iputstr("0x") + ft_uputnbr_base(UL pointer, HEXL));
 }
 
 static int	printit(char format, va_list args)
