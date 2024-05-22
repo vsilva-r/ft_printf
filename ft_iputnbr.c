@@ -14,7 +14,7 @@
 #include "ft_printf.h"
 #define DEC "0123456789"
 
-int	ft_iputnbr(long long int n)
+int	ft_iputnbr(long int n)
 {
 	return (ft_iputnbr_base(n, DEC));
 }

@@ -18,6 +18,7 @@
 # define OCT "01234567"
 # define HEXU "0123456789ABCDEF"
 # define HEXL "0123456789abcdef"
+# define BIN "01"
 
 #endif
 
@@ -26,5 +27,7 @@ int	ft_printf_bonus(const char *format, ...);
 int	ft_iputstr(char *str);
 int	ft_iputnbr_base(long int nbr, char *base);
 int	ft_uputnbr_base(unsigned long nbr, char *base);
-int	ft_iputnbr(long long int nbr);
+int	ft_iputnbr(long int nbr);
+int	ft_iputbinary(unsigned long nbr);
+int	ft_iputnbinary(unsigned long nbr, int nbits);
 int	ft_iputchar(char c);

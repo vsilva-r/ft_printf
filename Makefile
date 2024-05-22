@@ -18,7 +18,7 @@ CFLAGS = -Wall -Werror -Wextra
 LIBFT = ./libft/libft.a
 
 SRCS = ft_printf.c ft_iputnbr.c ft_iputnbr_base.c ft_iputstr.c ft_iputchar.c \
-		ft_uputnbr_base.c
+		ft_uputnbr_base.c ft_iputbinary.c
 		
 BONUS = ft_printf_bonus.c
 				
