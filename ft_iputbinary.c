@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_iputbinary.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsilva-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vsilva-r <vsilva-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:54:59 by vsilva-r          #+#    #+#             */
 /*   Updated: 2024/05/22 10:55:12 by vsilva-r         ###   ########.fr       */
@@ -15,7 +15,7 @@
 
 // Writes the last nbits bits of the binary representation of the number nbr
 // Returns the number of characters written.
-int	ft_iputnbinary(unsigned long nbr, int nbits)
+int	ft_iputnbinary(unsigned int nbr, int nbits)
 {
 	int		i;
 	int		written;
@@ -24,7 +24,7 @@ int	ft_iputnbinary(unsigned long nbr, int nbits)
 	i = nbits - 1;
 	while (i >= 0)
 	{
-		written += ft_iputchar((nbr & (1 << i--)));
+		written += ft_iputchar(((nbr & (1 << i--)) > 0) + '0');
 		if (i % 4 == 3)
 			written += ft_iputchar(' ');
 	}
@@ -32,7 +32,7 @@ int	ft_iputnbinary(unsigned long nbr, int nbits)
 }
 
 // Returns the minimum number of bits required for binary representation of n.
-static int	get_nbr_len(unsigned long n)
+static int	get_nbr_len(unsigned int n)
 {
 	int	len;
 
@@ -47,7 +47,7 @@ static int	get_nbr_len(unsigned long n)
 
 // Writes the binary representation of nbr in groups of 4 bits.
 // Returns the number of characters written.
-int	ft_iputbinary(unsigned long nbr)
+int	ft_iputbinary(unsigned int nbr)
 {
 	int		i;
 	int		written;
@@ -57,7 +57,7 @@ int	ft_iputbinary(unsigned long nbr)
 	i += 3 - (i % 4);
 	while (i >= 0)
 	{
-		written += ft_iputchar((nbr & (1 << i--)) + 33);
+		written += ft_iputchar(((nbr & (1 << i--)) > 0) + '0');
 		if (i % 4 == 3)
 			written += ft_iputchar(' ');
 	}
