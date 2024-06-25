@@ -6,7 +6,7 @@
 /*   By: vsilva-r <vsilva-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 12:00:17 by vsilva-r          #+#    #+#             */
-/*   Updated: 2024/05/20 17:33:50 by vsilva-r         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:49:07 by vsilva-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	printit(char format, va_list args)
 		return (iprintstring(va_arg(args, char *)));
 	else if (format == 'p')
 		return (iprintpointer(va_arg(args, void *)));
-	return (ft_iputchar('%'));
+	return (ft_iputchar('%') + ft_iputchar(format));
 }
 
 int	ft_printf(const char *format, ...)
