@@ -46,7 +46,7 @@ static int	printit(char format, va_list args)
 	else if (format == 'b')
 		return (ft_iputbinary(va_arg(args, unsigned long)));
 	else if (format == 'B')
-		return (ft_iputnbinary(va_arg(args, unsigned long), 64));
+		return (ft_iputnbinary(va_arg(args, unsigned long), 32));
 	else if (format == 'c')
 		return (ft_iputchar((char)va_arg(args, int)));
 	else if (format == 's')
